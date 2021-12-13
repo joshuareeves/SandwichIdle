@@ -5,11 +5,6 @@
 	<div class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden bg-yellow-50">
 		<aside class="sm:w-1/3 w-full flex-shrink flex-grow-0 mt-4">
 			<nav class="sticky top-0 px-4 w-full">
-				<!-- <ul class="flex flex-col space-y-3">
-					<li v-for="tab in tabs" v-bind:key="tab.component" v-bind:class="{active: currentTab == tab.component}" v-on:click="currentTab = tab.component">
-						<button class="nav-button">{{ tab.label }}</button>
-					</li>
-				</ul> -->
 				<ul class="flex flex-col space-y-3">
 					<li v-for="location in tabs" v-bind:key="location.component" v-bind:class="{active: currentTab == location.component}" v-on:click="currentTab = location.component">
 						<button class="nav-button">{{ location.name }}</button>
