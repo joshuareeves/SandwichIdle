@@ -6,8 +6,13 @@
 		<aside class="sm:w-1/3 w-full flex-shrink flex-grow-0 mt-4">
 			<nav class="sticky top-0 px-4 w-full">
 				<ul class="flex flex-col space-y-3">
-					<li v-for="location in tabs" v-bind:key="location.component" v-bind:class="{active: currentTab == location.component}" v-on:click="currentTab = location.component">
-						<button class="nav-button">{{ location.name }}</button>
+					<li
+						v-for="zone in unlockedZones"
+						v-bind:key="zone.component"
+						v-bind:class="{ active: currentTab == zone.component }"
+						v-on:click="currentTab = zone.component"
+					>
+						<button class="nav-button">{{ zone.name }}</button>
 					</li>
 				</ul>
 			</nav>
@@ -18,43 +23,7 @@
 			</keep-alive>
 		</main>
 		<aside class="sm:w-1/2 w-full flex-shrink flex-grow-0">
-			<div class="bg-yellow-200 mt-4 py-2 pl-3 rounded-tl-lg rounded-bl-lg">
-				<h2 class="text-xl">Resources</h2>
-				<table class="w-full">
-					<thead>
-						<tr>
-							<th colspan="2">Grains</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Wheat</td>
-							<td>24.6 lb</td>
-						</tr>
-						<tr>
-							<td>Rye</td>
-							<td>13.4 lb</td>
-						</tr>
-					</tbody>
-				</table>
-				<table class="w-full">
-					<thead>
-						<tr>
-							<th colspan="2">Breads</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>White</td>
-							<td>5 loaves</td>
-						</tr>
-						<tr>
-							<td>Whole Grain</td>
-							<td>2 loaves</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<resource-pane></resource-pane>
 		</aside>
 	</div>
 	<footer class="mt-auto bg-amber-200 px-2 py-1">
@@ -63,37 +32,39 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent } from 'vue'
-	import SandwichShop from './SandwichShopZone.vue'
-	import Bakery from './BakeryZone.vue';
-	import Farm from './FarmZone.vue';
+import { defineComponent } from 'vue'
+import { mapState } from 'pinia';
+import SandwichShopZone from './zones/SandwichShopZone.vue'
+import BakeryZone from './zones/BakeryZone.vue'
+import FarmZone from './zones/FarmZone.vue'
+import ResourcePane from './ui/ResourcePane.vue'
+import { useZoneStore } from '@/stores/ZoneStore';
 
-	export default defineComponent({
-		name: 'App',
-		components: {
-			SandwichShop,
-			Bakery,
-			Farm
-		},
-		data() {
-			return {
-				currentTab: "SandwichShop",
-				tabs: [
-					{ name: "Sandwich Shop", component: "SandwichShop" },
-					{ name: "Bakery", component: "Bakery" },
-					{ name: "Farm", component: "Farm" }
-				]
-			}
-		},
-	});
+export default defineComponent({
+	name: 'App',
+	components: {
+		SandwichShopZone,
+		BakeryZone,
+		FarmZone,
+		ResourcePane
+	},
+	data() {
+		return {
+			currentTab: "SandwichShopZone"
+		}
+	},
+	computed: {
+		...mapState(useZoneStore, ['unlockedZones'])
+	}
+})
 </script>
 
-<style>
-	.nav-button {
-		@apply bg-stone-300 p-2 rounded-lg leading-none w-full hover:bg-stone-200 shadow-md;
-	}
+<style scoped>
+.nav-button {
+	@apply bg-stone-300 p-2 rounded-lg leading-none w-full hover:bg-stone-200 shadow-md;
+}
 
-	li.active button {
-		@apply bg-stone-200;
-	}
+li.active button {
+	@apply bg-stone-200;
+}
 </style>
