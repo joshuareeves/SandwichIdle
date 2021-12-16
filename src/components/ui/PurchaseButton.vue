@@ -1,5 +1,5 @@
 <template>
-	<button class="button" @click="$emit('purchase', resource?.id)">Buy {{ resource?.name }}</button>
+	<button class="button" @click="$emit('purchase', resource?.id)">{{ resource?.name }} ({{ resourcePrice }})</button>
 </template>
 
 <script lang="ts">
@@ -10,6 +10,12 @@ export default defineComponent({
 	name: "PurchaseButton",
 	props: {
 		resource: { type: Object as () => Resource }
+	},
+	computed: {
+		resourcePrice() {
+			const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
+			return priceFormatter.format(this.resource?.purchasePrice ?? 0)
+		}
 	}
 })
 </script>

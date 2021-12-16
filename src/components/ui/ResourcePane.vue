@@ -1,14 +1,18 @@
 <template>
-	<div class="bg-yellow-200 mt-4 py-2 pl-3 rounded-tl-lg rounded-bl-lg">
+	<div class="bg-yellow-200 mt-4 p-2 rounded-tl-lg rounded-bl-lg">
 		<h2 class="text-xl">Resources</h2>
-		<ResourcePaneTable category="Breads" :resources="Object.values(unlockedBread)" />
-		<ResourcePaneTable category="Meats" :resources="Object.values(unlockedMeat)" />
+		<ResourcePaneTable
+			v-for="category in categories"
+			:key="category.id"
+			:category="category.name"
+			:resources="getUnlockedResourcesByCategory(category.id)"
+		/>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapState } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import ResourcePaneTable from './ResourcePaneTable.vue';
 import { useResourcesStore } from '@/stores/ResourcesStore';
 
@@ -18,7 +22,10 @@ export default defineComponent({
 		ResourcePaneTable
 	},
 	computed: {
-		...mapState(useResourcesStore, ['unlockedBread', 'unlockedMeat'])
+		...mapState(useResourcesStore, ['categories'])
+	},
+	methods: {
+		...mapActions(useResourcesStore, ['getUnlockedResourcesByCategory'])
 	}
 })
 </script>

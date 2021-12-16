@@ -7,8 +7,9 @@
 		</thead>
 		<tbody>
 			<tr v-for="resource in resources" :key="resource.name">
-				<td>{{ resource.name }}</td>
-				<td>{{ resource.quantity }}</td>
+				<td class="w-1/3">{{ resource.name }}</td>
+				<td class="w-1/3 text-center">{{ resource.quantity }}</td>
+				<td class="w-1/3 text-center">0/s</td>
 			</tr>
 		</tbody>
 	</table>

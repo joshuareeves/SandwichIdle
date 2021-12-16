@@ -1,28 +1,15 @@
 <template>
-	<h1 class="text-2xl font-bold">This is the sandwich shop!</h1>
-	<div class="grid grid-cols-4 gap-2">
-		<PurchaseButton
-			v-for="resource in unlockedBread"
-			:key="resource.id"
-			:resource="resource"
-			@purchase="onPurchaseResource"
-		/>
-	</div>
+	<h1 class="text-2xl font-bold">Sandwich Shop</h1>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapActions, mapState } from 'pinia';
 
-import PurchaseButton from '../ui/PurchaseButton.vue';
-
 import { useResourcesStore } from '@/stores/ResourcesStore';
 
 export default defineComponent({
 	name: "SandwichShopZone",
-	components: {
-		PurchaseButton
-	},
 	data() {
 		return {
 			resourceStore: useResourcesStore()

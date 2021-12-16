@@ -1,10 +1,10 @@
 <template>
 	<header class="mt-auto bg-amber-200 px-2 py-1">
-		<h1 class="text-1xl">Sandwich Idler Layout Prototype</h1>
+		<h1 class="text-1xl">Sandwich Idler {{ version }}</h1>
 	</header>
 	<div class="w-full flex flex-col sm:flex-row flex-grow overflow-hidden bg-yellow-50">
-		<aside class="sm:w-1/3 w-full flex-shrink flex-grow-0 mt-4">
-			<nav class="sticky top-0 px-4 w-full">
+		<aside class="sm:w-1/3 w-full flex-shrink flex-grow-0 my-4 relative">
+			<nav class="absolute top-0 px-4 w-full">
 				<ul class="flex flex-col space-y-3">
 					<li
 						v-for="zone in unlockedZones"
@@ -13,6 +13,13 @@
 						v-on:click="currentTab = zone.component"
 					>
 						<button class="nav-button">{{ zone.name }}</button>
+					</li>
+				</ul>
+			</nav>
+			<nav class="absolute bottom-0 px-4 w-full">
+				<ul class="flex flex-col space-y-3 bottom-0">
+					<li>
+						<button class="nav-button" @click="currentTab = 'SettingsZone'">Settings</button>
 					</li>
 				</ul>
 			</nav>
@@ -27,30 +34,38 @@
 		</aside>
 	</div>
 	<footer class="mt-auto bg-amber-200 px-2 py-1">
-		<h1 class="text-1xl">Sandwich Idler Layout Prototype</h1>
+		<h1 class="text-1xl">Sandwich Idler {{ version }}</h1>
 	</footer>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapState } from 'pinia';
+
 import SandwichShopZone from './zones/SandwichShopZone.vue'
+import MarketZone from './zones/MarketZone.vue'
 import BakeryZone from './zones/BakeryZone.vue'
 import FarmZone from './zones/FarmZone.vue'
+import SettingsZone from './zones/SettingsZone.vue';
+
 import ResourcePane from './ui/ResourcePane.vue'
+
 import { useZoneStore } from '@/stores/ZoneStore';
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		SandwichShopZone,
+		MarketZone,
 		BakeryZone,
 		FarmZone,
+		SettingsZone,
 		ResourcePane
 	},
 	data() {
 		return {
-			currentTab: "SandwichShopZone"
+			currentTab: "SandwichShopZone",
+			version: 'α0.1.4'
 		}
 	},
 	computed: {
