@@ -69,7 +69,7 @@ export default defineComponent({
 	data() {
 		return {
 			currentTab: "SandwichShopZone",
-			version: 'α0.1.4'
+			version: 'α0.1.5'
 		}
 	},
 	computed: {

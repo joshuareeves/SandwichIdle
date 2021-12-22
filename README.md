@@ -1,24 +1,15 @@
-# sandwich-idler
+# Sandwich Idler
 
-## Project setup
-```
-npm install
-```
+## About
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Your long lost uncle died and left you his sandwich shop. It's up to you to fulfill his last wishes and build a sandwich empire to rival ancient Rome!
+Inspired by wigmaker and Evolve, maybe someday this game will reach those rarefied hights.
 
-### Compiles and minifies for production
+## Building & Running
 ```
-npm run build
-```
+npm install // Set up the project
 
-### Lints and fixes files
+npm run serve // Compiles and hot-reloads for development
+npm run build // Compiles and minifies for production
+npm run lint // Lints and fixes files
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
