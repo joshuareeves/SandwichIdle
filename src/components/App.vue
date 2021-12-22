@@ -51,6 +51,10 @@ import SettingsZone from './zones/SettingsZone.vue';
 import ResourcePane from './ui/ResourcePane.vue'
 
 import { useZoneStore } from '@/stores/ZoneStore';
+import { useResourcesStore } from '@/stores/ResourcesStore';
+import { useGameStore } from '@/stores/GameStore';
+import { categories, resources } from '@/resources/resources';
+import { LoadSave, StartSave } from '@/save';
 
 export default defineComponent({
 	name: 'App',
@@ -70,6 +74,30 @@ export default defineComponent({
 	},
 	computed: {
 		...mapState(useZoneStore, ['unlockedZones'])
+	},
+	methods: {
+		startGame() {
+			const gameStore = useGameStore()
+			gameStore.start()
+		},
+		stopGame() {
+			const gameStore = useGameStore()
+			gameStore.pause()
+		}
+	},
+	created() {
+		console.log('Created!')
+		const resourceStore = useResourcesStore()
+		resourceStore.loadResources(categories, resources)
+
+		LoadSave()
+		StartSave()
+	},
+	mounted() {
+		console.log('Mounted!')
+	},
+	unmounted() {
+		console.log('Unmounted!')
 	}
 })
 </script>

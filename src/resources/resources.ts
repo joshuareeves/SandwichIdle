@@ -1,3 +1,18 @@
+export interface IResource {
+	id: string,
+	name: string,
+	category: string,
+	quantity: number,
+	purchasePrice: number,
+	purchaseQuantity: number,
+	unlocked: boolean
+}
+
+export interface ICategory {
+	id: string,
+	name: string
+}
+
 export const resources = [
 	//Bread
 	{ id: "white", name: "White", category: "bread", quantity: 0, purchasePrice: 2, purchaseQuantity: 24, unlocked: true },

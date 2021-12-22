@@ -1,6 +1,15 @@
 <template>
 	<div class="bg-yellow-200 mt-4 p-2 rounded-tl-lg rounded-bl-lg">
 		<h2 class="text-xl">Resources</h2>
+		<table class="w-full">
+			<tbody>
+				<tr>
+					<td class="w-1/3">Cash</td>
+					<td class="w-1/3 text-center">{{ cash.quantity }}</td>
+					<td class="w-1/3 text-center">0/s</td>
+				</tr>
+			</tbody>
+		</table>
 		<ResourcePaneTable
 			v-for="category in categories"
 			:key="category.id"
@@ -22,7 +31,7 @@ export default defineComponent({
 		ResourcePaneTable
 	},
 	computed: {
-		...mapState(useResourcesStore, ['categories'])
+		...mapState(useResourcesStore, ['categories', 'cash'])
 	},
 	methods: {
 		...mapActions(useResourcesStore, ['getUnlockedResourcesByCategory'])

@@ -4,12 +4,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Resource } from '@/stores/ResourcesStore';
+import { IResource } from '@/resources/resources'
 
 export default defineComponent({
 	name: "PurchaseButton",
 	props: {
-		resource: { type: Object as () => Resource }
+		resource: { type: Object as () => IResource }
 	},
 	computed: {
 		resourcePrice() {
