@@ -24,20 +24,26 @@ export const useGameStore = defineStore('gameStore', {
 
 		return {
 			worker: worker,
-			methods: methods
+			methods: methods,
+			paused: true
 		}
 	},
 	actions: {
 		registerLoop(name: string, interval: number, method: GameFunction) {
 			this.methods[name] = { name, interval, method }
+			if (this.paused == false) {
+				this.worker?.postMessage({ name, interval })
+			}
 		},
 		start() {
+			this.paused = false
 			for (const registration of Object.values(this.methods)) {
 				this.worker?.postMessage({ name: registration.name, interval: registration.interval })
 			}
 		},
 		pause() {
 			this.worker?.postMessage('clear')
+			this.paused = true
 		}
 	}
 })

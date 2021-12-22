@@ -55,6 +55,8 @@ import { useResourcesStore } from '@/stores/ResourcesStore';
 import { useGameStore } from '@/stores/GameStore';
 import { categories, resources } from '@/resources/resources';
 import { LoadSave, StartSave } from '@/save';
+import { mainInterval, MainLoop } from '@/game'
+import { resourceInterval, ResourceLoop } from '@/game';
 
 export default defineComponent({
 	name: 'App',
@@ -88,10 +90,15 @@ export default defineComponent({
 	created() {
 		console.log('Created!')
 		const resourceStore = useResourcesStore()
+		const gameStore = useGameStore()
+
 		resourceStore.loadResources(categories, resources)
 
 		LoadSave()
 		StartSave()
+
+		gameStore.registerLoop('main', mainInterval, MainLoop)
+		gameStore.registerLoop('resource', resourceInterval, ResourceLoop)
 	},
 	mounted() {
 		console.log('Mounted!')
